@@ -7,21 +7,17 @@
 html, body {
   height: 100%;
   overflow-x: hidden;
-  scroll-behavior: auto; /* prevents auto-jump issues */
-}
-
-body {
+  scroll-behavior: auto;
   background: #0f0f0f;
   color: white;
   font-family: Arial, sans-serif;
 }
 
-/* MAIN CONTAINER */
 .container {
   width: 100%;
 }
 
-/* INTRO (FIRST SCREEN) */
+/* INTRO */
 .intro {
   height: 100vh;
   width: 100%;
@@ -67,5 +63,3 @@ h2 {
 iframe {
   border-radius: 12px;
 }
-
-/* IMPORTANT: DO NOT USE SCROLL SNAP */
