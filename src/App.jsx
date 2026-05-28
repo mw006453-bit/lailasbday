@@ -2,6 +2,25 @@ import React from "react";
 import "./App.css";
 
 export default function App() {
+  const [startTyping, setStartTyping] = React.useState(false);
+const typeRef = React.useRef(null);
+  React.useEffect(() => {
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (entry.isIntersecting) {
+        setStartTyping(true);
+        observer.disconnect();
+      }
+    },
+    { threshold: 0.5 }
+  );
+
+  if (typeRef.current) {
+    observer.observe(typeRef.current);
+  }
+
+  return () => observer.disconnect();
+}, []);
   const topWords = [
     { word: "Crazy", count: 54 },
     { word: "amazing (ik i am)", count: 53 },
@@ -18,23 +37,25 @@ export default function App() {
   const blockedCount = 7;
   const pedoCount = 4;
 
-  const Typewriter = ({ text, speed = 60 }) => {
-    const [out, setOut] = React.useState("");
+  const Typewriter = ({ text, start, speed = 55 }) => {
+  const [out, setOut] = React.useState("");
 
-    React.useEffect(() => {
-      let i = 0;
+  React.useEffect(() => {
+    if (!start) return;
 
-      const interval = setInterval(() => {
-        setOut(text.slice(0, i));
-        i++;
-        if (i > text.length) clearInterval(interval);
-      }, speed);
+    let i = 0;
 
-      return () => clearInterval(interval);
-    }, [text, speed]);
+    const interval = setInterval(() => {
+      setOut(text.slice(0, i));
+      i++;
+      if (i > text.length) clearInterval(interval);
+    }, speed);
 
-    return <>{out}</>;
-  };
+    return () => clearInterval(interval);
+  }, [start, text, speed]);
+
+  return <>{out}</>;
+};
 
   React.useEffect(() => {
     window.history.scrollRestoration = "manual";
@@ -103,16 +124,15 @@ export default function App() {
         <h2>now that is everything, scroll down more tho &gt;:(</h2>
       </section>
 
-      {/* FINAL TYPEWRITER */}
-      <section className="section">
-        <h2>
-          <Typewriter
-            speed={55}
-            text="I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol. happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3."
-          />
-        </h2>
-      </section>
-
+     <section className="section" ref={typeRef}>
+  <h2>
+    <Typewriter
+      start={startTyping}
+      speed={55}
+      text="I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol. happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3."
+    />
+  </h2>
+</section>
     </div>
   );
 }
