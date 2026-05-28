@@ -54,3 +54,10 @@ h2 {
 .highlight {
   color: #ff4d6d;
 }
+.special h2 {
+  font-size: 3rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  text-shadow: 0 0 15px rgba(255,255,255,0.15);
+}
