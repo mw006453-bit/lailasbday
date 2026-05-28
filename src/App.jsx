@@ -85,11 +85,16 @@ const typeRef = React.useRef(null);
 
       {/* TOP WORDS */}
       {topWords.map((item, index) => (
-        <section className="section" key={index}>
-          <h1 className="highlight">{item.word}</h1>
-          <h2>{item.count} times</h2>
-        </section>
-      ))}
+  <React.Fragment key={index}>
+    <section className="section">
+      <h1 className="highlight">{item.word}</h1>
+    </section>
+
+    <section className="section">
+      <h2>{item.count} times</h2>
+    </section>
+  </React.Fragment>
+))}
 
       {/* JOKE */}
       <section className="section">
