@@ -38,15 +38,23 @@ export default function App() {
     return <>{out}</>;
   };
 
-  // force start at top (fix skipping intro)
+  // HARD FIX: prevents auto-scroll jump
   React.useEffect(() => {
-    window.scrollTo(0, 0);
+    window.history.scrollRestoration = "manual";
+
+    requestAnimationFrame(() => {
+      window.scrollTo(0, 0);
+    });
+
+    setTimeout(() => {
+      window.scrollTo(0, 0);
+    }, 50);
   }, []);
 
   return (
     <div className="container">
 
-      {/* INTRO MUSIC */}
+      {/* INTRO MUSIC (FIRST SCREEN) */}
       <div className="intro">
         <iframe
           width="560"
