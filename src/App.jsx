@@ -53,18 +53,13 @@ export default function App() {
 
   return (
     <div className="container">
-
-      {/* INTRO MUSIC (FIRST SCREEN) */}
-      <div className="intro">
-        <iframe
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/rHvQakk1zMA"
-          title="Laufey - From The Start"
-          frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
+{/* MUSIC */}
+<audio controls autoPlay className="audio">
+  <source src="/music.mp3" type="audio/mpeg" />
+  Your browser does not support audio.
+</audio>
+     
+        
       </div>
 
       <section className="section">
