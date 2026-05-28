@@ -38,10 +38,15 @@ export default function App() {
     return <>{out}</>;
   };
 
+  // force start at top (fix skipping intro)
+  React.useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="container">
 
-      {/* INTRO MUSIC (FIRST SCREEN) */}
+      {/* INTRO MUSIC */}
       <div className="intro">
         <iframe
           width="560"
@@ -49,24 +54,21 @@ export default function App() {
           src="https://www.youtube.com/embed/rHvQakk1zMA"
           title="Laufey - From The Start"
           frameBorder="0"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allow="accelerometer; autoplay; clipboard-write; gyroscope; picture-in-picture"
           allowFullScreen
         />
       </div>
 
-      {/* SECTION 1 */}
       <section className="section">
         <h1>HAPPY BIRTHDAYY 🎉</h1>
       </section>
 
-      {/* SECTION 2 */}
       <section className="section">
         <h2>
           it took some time but i compiled all the words you said and ranked your top 5 most used words..
         </h2>
       </section>
 
-      {/* TOP WORDS */}
       {topWords.map((item, index) => (
         <React.Fragment key={index}>
           <section className="section">
@@ -79,7 +81,6 @@ export default function App() {
         </React.Fragment>
       ))}
 
-      {/* JOKE */}
       <section className="section">
         <h2>
           if i had a dime for everytime you said "{jokeWord.word}"
@@ -92,7 +93,6 @@ export default function App() {
         </h2>
       </section>
 
-      {/* STATS */}
       <section className="section">
         <h2>i have been</h2>
       </section>
@@ -125,7 +125,6 @@ export default function App() {
         <h2>now that is everything, scroll down more tho &gt;:(</h2>
       </section>
 
-      {/* FINAL SECTION */}
       <section className="section">
         <h2>
           <Typewriter speed={80}>
