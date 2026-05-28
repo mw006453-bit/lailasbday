@@ -42,15 +42,18 @@ export default function App() {
   return (
     <div className="container">
       <div className="music-player">
+ {/* INTRO MUSIC SECTION */}
+<section className="intro-music">
   <iframe
-    width="320"
-    height="80"
+    width="700"
+    height="400"
     src="https://www.youtube.com/embed/rHvQakk1zMA"
     title="Laufey - From The Start"
     frameBorder="0"
     allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
     allowFullScreen
   />
+</section>
 </div>
 
       {/* SECTION 1 */}
