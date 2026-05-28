@@ -18,42 +18,26 @@ export default function App() {
   const blockedCount = 7;
   const pedoCount = 4;
 
-  const finalText =
-    "I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol. happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3.";
+  // 👉 INLINE TYPEWRITER COMPONENT
+  const Typewriter = ({ children, speed = 60 }) => {
+    const text = children;
+    const [out, setOut] = React.useState("");
 
-  const [typed, setTyped] = React.useState("");
-  const [start, setStart] = React.useState(false);
+    React.useEffect(() => {
+      let i = 0;
 
-  // scroll trigger
-  React.useEffect(() => {
-    const onScroll = () => {
-      const scrollPos = window.scrollY + window.innerHeight;
-      const bottom = document.body.scrollHeight;
+      const interval = setInterval(() => {
+        setOut(text.slice(0, i));
+        i++;
 
-      if (scrollPos >= bottom - 200) {
-        setStart(true);
-      }
-    };
+        if (i > text.length) clearInterval(interval);
+      }, speed);
 
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+      return () => clearInterval(interval);
+    }, [text, speed]);
 
-  // 🌙 SLOW TYPEWRITER
-  React.useEffect(() => {
-    if (!start) return;
-
-    let i = 0;
-
-    const interval = setInterval(() => {
-      setTyped(finalText.slice(0, i));
-      i++;
-
-      if (i > finalText.length) clearInterval(interval);
-    }, 60); // 🔥 SLOW SPEED (higher = slower)
-
-    return () => clearInterval(interval);
-  }, [start]);
+    return <>{out}</>;
+  };
 
   return (
     <div className="container">
@@ -123,13 +107,14 @@ export default function App() {
       <section className="section">
         <h2>now that is everything, scroll down more tho &gt;:(</h2>
       </section>
-  {/* FINAL ENDING + MUSIC */}
+
+      {/* ⭐ FINAL SECTION — MESSAGE STAYS WRITTEN HERE */}
       <section className="section">
         <h2>
-          I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol.
-          happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now &lt;3.
+          <Typewriter speed={80}>
+            I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol. happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3.
+          </Typewriter>
         </h2>
-
 
         <iframe
           width="100%"
