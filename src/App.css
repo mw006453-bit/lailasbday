@@ -7,7 +7,6 @@
 html, body {
   height: 100%;
   overflow-x: hidden;
-  scroll-behavior: auto; /* prevents weird auto-jumps */
   background: #0f0f0f;
   color: white;
   font-family: Arial, sans-serif;
@@ -17,25 +16,21 @@ html, body {
   width: 100%;
 }
 
-/* AUDIO PLAYER */
-.audio {
-  width: 320px;
-  margin: 40px auto;
-  display: block;
+/* MUSIC FIXED TOP RIGHT */
+.music {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 9999;
 }
 
-/* INTRO / FIRST SCREEN SPACE (keeps layout stable) */
-.intro {
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.audio {
+  width: 180px;
 }
 
 /* SECTIONS */
 .section {
   min-height: 100vh;
-  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -55,13 +50,7 @@ h2 {
   line-height: 1.6;
 }
 
-/* HIGHLIGHT WORDS */
+/* COLORS */
 .highlight {
   color: #ff4d6d;
-  font-size: 3rem;
-}
-
-/* RED TEXT */
-.red {
-  color: #ff3b3b;
 }
