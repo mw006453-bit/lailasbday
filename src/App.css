@@ -4,21 +4,27 @@
   box-sizing: border-box;
 }
 
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  scroll-behavior: auto; /* prevents auto-jump issues */
+}
+
 body {
   background: #0f0f0f;
   color: white;
   font-family: Arial, sans-serif;
-  overflow-x: hidden;
 }
 
-/* MAIN */
+/* MAIN CONTAINER */
 .container {
   width: 100%;
 }
 
-/* INTRO */
+/* INTRO (FIRST SCREEN) */
 .intro {
   height: 100vh;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,6 +33,7 @@ body {
 /* SECTIONS */
 .section {
   min-height: 100vh;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -46,6 +53,7 @@ h2 {
   line-height: 1.6;
 }
 
+/* HIGHLIGHT */
 .highlight {
   color: #ff4d6d;
   font-size: 3rem;
@@ -55,13 +63,9 @@ h2 {
   color: #ff3b3b;
 }
 
-/* iframe */
+/* IFRAME */
 iframe {
   border-radius: 12px;
-  margin-top: 10px;
 }
 
-/* smooth scroll */
-html {
-  scroll-behavior: smooth;
-}
+/* IMPORTANT: DO NOT USE SCROLL SNAP */
