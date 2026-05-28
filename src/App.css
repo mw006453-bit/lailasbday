@@ -8,21 +8,20 @@ body {
   background: #0f0f0f;
   color: white;
   font-family: Arial, sans-serif;
-}
-
-/* MAIN CONTAINER */
-.container {
-  width: 100%;
   overflow-x: hidden;
 }
 
-/* INTRO SECTION (music screen) */
+/* MAIN */
+.container {
+  width: 100%;
+}
+
+/* INTRO */
 .intro {
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #0f0f0f;
 }
 
 /* SECTIONS */
@@ -32,14 +31,13 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 40px;
   text-align: center;
+  padding: 40px;
 }
 
-/* HEADINGS */
+/* TEXT */
 h1 {
   font-size: 3rem;
-  font-weight: bold;
 }
 
 h2 {
@@ -48,24 +46,22 @@ h2 {
   line-height: 1.6;
 }
 
-/* HIGHLIGHT WORDS */
 .highlight {
   color: #ff4d6d;
   font-size: 3rem;
 }
 
-/* RED TEXT */
 .red {
   color: #ff3b3b;
 }
 
-/* YOUTUBE IFRAME */
+/* iframe */
 iframe {
   border-radius: 12px;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
-/* OPTIONAL: smooth scroll */
+/* smooth scroll */
 html {
   scroll-behavior: smooth;
 }
