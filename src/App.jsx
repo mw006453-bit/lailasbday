@@ -97,15 +97,17 @@ const typeRef = React.useRef(null);
 ))}
 
       {/* JOKE */}
-      <section className="section">
-        <h2>
-          if i had a dime for everytime you said "{jokeWord.word}"
-        </h2>
-        <h2>
-          i'd have {jokeWord.count} dimes which isn't alot but funny
-        </h2>
-      </section>
+    <section className="section">
+  <h2>
+    if i had a dime for everytime you said "{jokeWord.word}"
+  </h2>
+</section>
 
+<section className="section">
+  <h2>
+    i'd have {jokeWord.count} dimes which isn't alot but funny
+  </h2>
+</section>
       {/* STATS */}
       <section className="section">
         <h2>i have been emotionally blocked {blockedCount} times</h2>
