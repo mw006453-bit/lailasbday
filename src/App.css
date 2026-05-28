@@ -1,69 +1,71 @@
-body {
+* {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0f0f1a, #1a1a2e);
-  color: white;
+  padding: 0;
+  box-sizing: border-box;
 }
 
+body {
+  background: #0f0f0f;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+/* MAIN CONTAINER */
 .container {
   width: 100%;
   overflow-x: hidden;
 }
 
+/* INTRO SECTION (music screen) */
+.intro {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0f0f0f;
+}
+
+/* SECTIONS */
 .section {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  text-align: center;
   padding: 40px;
+  text-align: center;
 }
 
+/* HEADINGS */
 h1 {
   font-size: 3rem;
+  font-weight: bold;
 }
 
 h2 {
-  font-size: 1.6rem;
-  max-width: 800px;
+  font-size: 1.5rem;
+  max-width: 900px;
   line-height: 1.6;
 }
 
+/* HIGHLIGHT WORDS */
 .highlight {
-  font-size: 4rem;
-  color: #ffcc00;
+  color: #ff4d6d;
+  font-size: 3rem;
 }
 
+/* RED TEXT */
 .red {
-  color: #ff3b6b !important;
-  font-weight: 800;
-  text-shadow: 0 0 12px rgba(255, 59, 107, 0.7);
+  color: #ff3b3b;
 }
 
-/* smooth scroll feel */
+/* YOUTUBE IFRAME */
+iframe {
+  border-radius: 12px;
+  margin-top: 20px;
+}
+
+/* OPTIONAL: smooth scroll */
 html {
   scroll-behavior: smooth;
-}
-
-/* optional glow for vibe */
-.section h1, .section h2 {
-  transition: 0.3s ease;
-}
-.section:hover h1,
-.section:hover h2 {
-  transform: scale(1.02);
-}
-.music-player {
-  position: fixed;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-}
-.intro-music {
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
