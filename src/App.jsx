@@ -22,17 +22,38 @@ export default function App() {
     "I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol. happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3.";
 
   const [typedText, setTypedText] = React.useState("");
+  const [startTyping, setStartTyping] = React.useState(false);
 
+  // detect scroll to bottom
   React.useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY + window.innerHeight;
+      const pageHeight = document.body.scrollHeight;
+
+      if (scrollY >= pageHeight - 200) {
+        setStartTyping(true);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // typewriter effect (ONLY after scroll trigger)
+  React.useEffect(() => {
+    if (!startTyping) return;
+
     let i = 0;
+
     const interval = setInterval(() => {
       setTypedText(finalText.slice(0, i));
       i++;
+
       if (i > finalText.length) clearInterval(interval);
     }, 25);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [startTyping]);
 
   return (
     <div className="container">
@@ -52,6 +73,7 @@ export default function App() {
           <section className="section">
             <h1 className="highlight">{item.word}</h1>
           </section>
+
           <section className="section">
             <h2>{item.count} times</h2>
           </section>
