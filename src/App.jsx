@@ -123,10 +123,13 @@ export default function App() {
       <section className="section">
         <h2>now that is everything, scroll down more tho &gt;:(</h2>
       </section>
-
-      {/* ⭐ FINAL TYPEWRITER SECTION */}
+  {/* FINAL ENDING + MUSIC */}
       <section className="section">
-        <h2>{typed}</h2>
+        <h2>
+          I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol.
+          happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now &lt;3.
+        </h2>
+
 
         <iframe
           width="100%"
