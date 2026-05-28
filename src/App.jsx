@@ -18,14 +18,14 @@ export default function App() {
   const blockedCount = 7;
   const pedoCount = 4;
 
-  // ⭐ YOUR EXACT MESSAGE
+  // ⭐ YOUR ORIGINAL MESSAGE (UNCHANGED)
   const finalText =
     "I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol. happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3.";
 
   const [typedText, setTypedText] = React.useState("");
   const [startTyping, setStartTyping] = React.useState(false);
 
-  // scroll trigger (start when reaching bottom)
+  // scroll trigger
   React.useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY + window.innerHeight;
@@ -40,7 +40,7 @@ export default function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // typewriter effect
+  // typewriter ONLY starts after scroll
   React.useEffect(() => {
     if (!startTyping) return;
 
@@ -59,16 +59,19 @@ export default function App() {
   return (
     <div className="container">
 
+      {/* SECTION 1 */}
       <section className="section">
         <h1>HAPPY BIRTHDAYY 🎉</h1>
       </section>
 
+      {/* SECTION 2 */}
       <section className="section">
         <h2>
           it took some time but i compiled all the words you said and ranked your top 5 most used words..
         </h2>
       </section>
 
+      {/* TOP WORDS */}
       {topWords.map((item, index) => (
         <React.Fragment key={index}>
           <section className="section">
@@ -81,6 +84,7 @@ export default function App() {
         </React.Fragment>
       ))}
 
+      {/* JOKE */}
       <section className="section">
         <h2>
           if i had a dime for everytime you said "{jokeWord.word}"
@@ -93,6 +97,7 @@ export default function App() {
         </h2>
       </section>
 
+      {/* STATS */}
       <section className="section">
         <h2>i have been</h2>
       </section>
@@ -121,11 +126,12 @@ export default function App() {
         <h2>{pedoCount} times</h2>
       </section>
 
+      {/* SCROLL MESSAGE */}
       <section className="section">
         <h2>now that is everything, scroll down more tho &gt;:(</h2>
       </section>
 
-      {/* ⭐ FINAL TYPEWRITER SECTION */}
+      {/* FINAL SECTION (YOUR MESSAGE RESTORED EXACTLY) */}
       <section className="section">
         <h2>{typedText}</h2>
 
