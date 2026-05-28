@@ -18,7 +18,7 @@ export default function App() {
   const blockedCount = 7;
   const pedoCount = 4;
 
-  const Typewriter = ({ text, speed = 80 }) => {
+  const Typewriter = ({ text, speed = 60 }) => {
     const [out, setOut] = React.useState("");
 
     React.useEffect(() => {
@@ -44,8 +44,8 @@ export default function App() {
   return (
     <div className="container">
 
-      {/* MUSIC (LOCAL FILE) */}
-      <div className="intro">
+      {/* MUSIC (FIXED TOP RIGHT) */}
+      <div className="music">
         <audio controls className="audio">
           <source src="/music.mp3" type="audio/mpeg" />
         </audio>
@@ -107,7 +107,7 @@ export default function App() {
       <section className="section">
         <h2>
           <Typewriter
-            speed={60}
+            speed={55}
             text="I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol. happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3."
           />
         </h2>
