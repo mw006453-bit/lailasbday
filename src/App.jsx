@@ -129,7 +129,8 @@ const typeRef = React.useRef(null);
     <Typewriter
       start={startTyping}
       speed={55}
-      text="I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.... and talker too you are the full package lol. I will always be infinitely grateful to have you as a friend and i will forever cherish our friendship :D. Happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3."
+      text="I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.... and talker too you are the full package lol. I will always be infinitely grateful to have you as a friend and i will forever cherish our friendship :D. Happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3.
+      -your fellow chipmunk 🐿"
     />
   </h2>
 </section>
