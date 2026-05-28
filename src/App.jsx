@@ -47,7 +47,7 @@ export default function App() {
       {/* MUSIC (FIXED TOP RIGHT) */}
       <div className="music">
         <audio controls className="audio">
-          <source src="/music.mp3" type="audio/mpeg" />
+          <source src="/music.mp3.mp3" type="audio/mpeg" />
         </audio>
       </div>
 
