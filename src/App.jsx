@@ -18,7 +18,6 @@ export default function App() {
   const blockedCount = 7;
   const pedoCount = 4;
 
-  // ⭐ TYPEWRITER COMPONENT
   const Typewriter = ({ children, speed = 80 }) => {
     const text = children;
     const [out, setOut] = React.useState("");
@@ -41,26 +40,24 @@ export default function App() {
 
   return (
     <div className="container">
-      <div className="music-player">
- {/* INTRO MUSIC SECTION */}
-<section className="intro-music">
-  <iframe
-    width="700"
-    height="400"
-    src="https://www.youtube.com/embed/rHvQakk1zMA"
-    title="Laufey - From The Start"
-    frameBorder="0"
-    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-    allowFullScreen
-  />
-</section>
-</div>
+
+      {/* INTRO MUSIC (FIRST SCREEN) */}
+      <div className="intro">
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/rHvQakk1zMA"
+          title="Laufey - From The Start"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+        />
+      </div>
 
       {/* SECTION 1 */}
       <section className="section">
         <h1>HAPPY BIRTHDAYY 🎉</h1>
       </section>
-  
 
       {/* SECTION 2 */}
       <section className="section">
@@ -128,24 +125,13 @@ export default function App() {
         <h2>now that is everything, scroll down more tho &gt;:(</h2>
       </section>
 
-      {/* FINAL ENDING + MUSIC */}
+      {/* FINAL SECTION */}
       <section className="section">
         <h2>
           <Typewriter speed={80}>
             {"I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol. happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3."}
           </Typewriter>
         </h2>
-
-        <iframe
-          width="100%"
-          height="166"
-          style={{ marginTop: "20px", borderRadius: "12px" }}
-          src="https://www.youtube.com/embed/rHvQakk1zMA"
-          title="Laufey - From The Start"
-          frameBorder="0"
-          allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowFullScreen
-        />
       </section>
 
     </div>
