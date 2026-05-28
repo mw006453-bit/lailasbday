@@ -109,13 +109,21 @@ const typeRef = React.useRef(null);
   </h2>
 </section>
       {/* STATS */}
-      <section className="section">
-        <h2>i have been emotionally blocked {blockedCount} times</h2>
-      </section>
+    <section className="section">
+  <h2>i have been</h2>
+</section>
 
-      <section className="section">
-        <h2>you have made 6-7 jokes 17 times🫩</h2>
-      </section>
+<section className="section">
+  <h2>emotionally blocked {blockedCount} times</h2>
+</section>
+
+     <section className="section">
+  <h2>you have made 6-7 jokes</h2>
+</section>
+
+<section className="section">
+  <h2>17 times🫩</h2>
+</section>
 
       <section className="section">
         <h2>
