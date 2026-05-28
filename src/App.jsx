@@ -18,8 +18,7 @@ export default function App() {
   const blockedCount = 7;
   const pedoCount = 4;
 
-  const Typewriter = ({ children, speed = 80 }) => {
-    const text = children;
+  const Typewriter = ({ text, speed = 80 }) => {
     const [out, setOut] = React.useState("");
 
     React.useEffect(() => {
@@ -28,7 +27,6 @@ export default function App() {
       const interval = setInterval(() => {
         setOut(text.slice(0, i));
         i++;
-
         if (i > text.length) clearInterval(interval);
       }, speed);
 
@@ -38,30 +36,22 @@ export default function App() {
     return <>{out}</>;
   };
 
-  // HARD FIX: prevents auto-scroll jump
   React.useEffect(() => {
     window.history.scrollRestoration = "manual";
-
-    requestAnimationFrame(() => {
-      window.scrollTo(0, 0);
-    });
-
-    setTimeout(() => {
-      window.scrollTo(0, 0);
-    }, 50);
+    window.scrollTo(0, 0);
   }, []);
 
   return (
     <div className="container">
-{/* MUSIC */}
-<audio controls autoPlay className="audio">
-  <source src="/music.mp3" type="audio/mpeg" />
-  Your browser does not support audio.
-</audio>
-     
-        
+
+      {/* MUSIC (LOCAL FILE) */}
+      <div className="intro">
+        <audio controls className="audio">
+          <source src="/music.mp3" type="audio/mpeg" />
+        </audio>
       </div>
 
+      {/* TITLE */}
       <section className="section">
         <h1>HAPPY BIRTHDAYY 🎉</h1>
       </section>
@@ -72,46 +62,31 @@ export default function App() {
         </h2>
       </section>
 
+      {/* TOP WORDS */}
       {topWords.map((item, index) => (
-        <React.Fragment key={index}>
-          <section className="section">
-            <h1 className="highlight">{item.word}</h1>
-          </section>
-
-          <section className="section">
-            <h2>{item.count} times</h2>
-          </section>
-        </React.Fragment>
+        <section className="section" key={index}>
+          <h1 className="highlight">{item.word}</h1>
+          <h2>{item.count} times</h2>
+        </section>
       ))}
 
+      {/* JOKE */}
       <section className="section">
         <h2>
           if i had a dime for everytime you said "{jokeWord.word}"
         </h2>
-      </section>
-
-      <section className="section">
         <h2>
           i'd have {jokeWord.count} dimes which isn't alot but funny
         </h2>
       </section>
 
+      {/* STATS */}
       <section className="section">
-        <h2>i have been</h2>
+        <h2>i have been emotionally blocked {blockedCount} times</h2>
       </section>
 
       <section className="section">
-        <h2 className="red">
-          emotionally blocked {blockedCount} times
-        </h2>
-      </section>
-
-      <section className="section">
-        <h2>you have made</h2>
-      </section>
-
-      <section className="section">
-        <h2>6-7 jokes 17 times🫩</h2>
+        <h2>you have made 6-7 jokes 17 times🫩</h2>
       </section>
 
       <section className="section">
@@ -128,11 +103,13 @@ export default function App() {
         <h2>now that is everything, scroll down more tho &gt;:(</h2>
       </section>
 
+      {/* FINAL TYPEWRITER */}
       <section className="section">
         <h2>
-          <Typewriter speed={80}>
-            {"I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol. happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3."}
-          </Typewriter>
+          <Typewriter
+            speed={60}
+            text="I know its not much but i really wanted to tell you that i enjoy your friendship so much you are the best and those 50 days (yes 50 days only can you imagine?) were the best you helped me through a really hard time and listened to me yap abt some bs and in return blessed me with your amazing vns with the most gossip i ever heard which is prolly higher than the recommended amount for the average human male, you are a really good listener.. and talker too you are the full package lol. happy 18th birthday i hope your coming years are better and better and that we are still friends 67 years from now <3."
+          />
         </h2>
       </section>
 
