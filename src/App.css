@@ -110,3 +110,20 @@ h2 {
     transform: scale(1);
   }
 }
+.music {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.music:hover {
+  opacity: 1;
+}
+
+.audio {
+  width: 140px;
+}
