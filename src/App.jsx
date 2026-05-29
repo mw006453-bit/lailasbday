@@ -5,6 +5,7 @@ export default function App() {
   const [startTyping, setStartTyping] = React.useState(false);
 const typeRef = React.useRef(null);
   const audioRef = React.useRef(null);
+  const [started, setStarted] = React.useState(false);
   React.useEffect(() => {
   const observer = new IntersectionObserver(
     ([entry]) => {
@@ -73,9 +74,22 @@ const typeRef = React.useRef(null);
 
   tryPlay();
 }, []);
+const startExperience = async () => {
+  setStarted(true);
 
+  try {
+    await audioRef.current.play();
+  } catch (err) {
+    console.log("Playback failed");
+  }
+};
   return (
     <div className="container">
+      {!started && (
+  <div className="overlay" onClick={startExperience}>
+    <h1>click anywhere to start 🎧</h1>
+  </div>
+)}
 
       {/* MUSIC (FIXED TOP RIGHT) */}
       <div className="music">
