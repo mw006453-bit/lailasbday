@@ -7,28 +7,24 @@ export default function App() {
   const audioRef = React.useRef(null);
   const [started, setStarted] = React.useState(false);
 
- const moveEmoji = () => {
-  setEmojiPos((prev) => {
-    let newPos;
-
-    // 20% chance it becomes catchable
-    const isCatchable = Math.random() < 0.2;
-
-    if (isCatchable) {
-      newPos = {
-        top: prev.top,
-        left: prev.left,
-      };
-    } else {
-      newPos = {
-        top: Math.random() * 70 + 10,
-        left: Math.random() * 70 + 10,
-      };
-    }
-
-    return newPos;
+  // 🎮 GAME STATE (MISSING IN YOUR CODE)
+  const [emojiPos, setEmojiPos] = React.useState({
+    top: 50,
+    left: 50,
+    count: 0,
+    catchable: false,
   });
-};
+
+  React.useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStartTyping(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.5 }
+    );
 
     if (typeRef.current) {
       observer.observe(typeRef.current);
@@ -100,11 +96,25 @@ export default function App() {
     }
   };
 
-  // 🎮 GAME FUNCTION (ADDED)
+  // 🎮 FIXED GAME LOGIC (4 MOVES THEN WINNABLE)
   const moveEmoji = () => {
-    setEmojiPos({
-      top: Math.random() * 70 + 10,
-      left: Math.random() * 70 + 10,
+    setEmojiPos((prev) => {
+      const newCount = (prev.count || 0) + 1;
+
+      if (newCount >= 4) {
+        return {
+          ...prev,
+          count: 4,
+          catchable: true,
+        };
+      }
+
+      return {
+        top: Math.random() * 70 + 10,
+        left: Math.random() * 70 + 10,
+        count: newCount,
+        catchable: false,
+      };
     });
   };
 
@@ -198,7 +208,7 @@ export default function App() {
         </h2>
       </section>
 
-      {/* 🎮 GAME (ADDED) */}
+      {/* 🎮 GAME */}
       <section className="section game">
         <h2>catch me if you can :D</h2>
         <p>good luck</p>
@@ -206,8 +216,13 @@ export default function App() {
         <button
           className="emoji"
           onMouseEnter={moveEmoji}
+          onClick={() => {
+            if (emojiPos.catchable) {
+              alert("you caught it 🎉");
+            }
+          }}
           style={{
-            position: "absolute",
+            position: "fixed",
             top: emojiPos.top + "vh",
             left: emojiPos.left + "vw",
           }}
