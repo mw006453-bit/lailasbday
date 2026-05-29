@@ -62,7 +62,7 @@ h2 {
   color: #ff4d6d;
 }
 
-/* SPECIAL TEXT BLOCKS */
+/* SPECIAL TEXT */
 .special h2 {
   font-size: 3.2rem !important;
   font-weight: 800;
@@ -111,7 +111,7 @@ h2 {
   overflow: hidden;
 }
 
-/* EMOJI BUTTON */
+/* EMOJI */
 .emoji {
   font-size: 3rem;
   background: none;
@@ -125,7 +125,7 @@ h2 {
 }
 
 /* ========================= */
-/* WIN SCREEN (FINAL VERSION) */
+/* WIN SCREEN (CLEAN VERSION) */
 /* ========================= */
 
 .winScreen {
@@ -140,13 +140,11 @@ h2 {
 
   z-index: 99999;
 
-  /* important: allows underlying page interaction */
   pointer-events: none;
 
   animation: winFadeIn 0.3s ease;
 }
 
-/* WIN TEXT */
 .winScreen h1 {
   font-size: 4rem;
   color: #ff7ad9;
@@ -154,21 +152,30 @@ h2 {
   z-index: 2;
 }
 
-/* POP EFFECT */
 @keyframes pop {
   0% { transform: scale(0.3); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* subtle fade in */
 @keyframes winFadeIn {
   from { opacity: 0; }
   to { opacity: 1; }
 }
 
-/* CONFETTI (SMOOTH CONTINUOUS) */
-.winScreen::before,
-.winScreen::after {
+/* ========================= */
+/* PERMANENT CONFETTI LAYER */
+/* ========================= */
+
+.confettiLayer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+.confettiLayer::before,
+.confettiLayer::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -187,12 +194,11 @@ h2 {
   opacity: 0.9;
 }
 
-.winScreen::after {
+.confettiLayer::after {
   animation-duration: 8s;
   opacity: 0.6;
 }
 
-/* CONFETTI FALL */
 @keyframes confettiFall {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100%); }
