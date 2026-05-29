@@ -124,7 +124,10 @@ h2 {
   filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
 }
 
-/* WIN SCREEN (FIXED: ALLOWS SCROLL BEHIND) */
+/* ========================= */
+/* WIN SCREEN (FINAL VERSION) */
+/* ========================= */
+
 .winScreen {
   position: fixed;
   inset: 0;
@@ -137,7 +140,10 @@ h2 {
 
   z-index: 99999;
 
+  /* important: allows underlying page interaction */
   pointer-events: none;
+
+  animation: winFadeIn 0.3s ease;
 }
 
 /* WIN TEXT */
@@ -146,16 +152,21 @@ h2 {
   color: #ff7ad9;
   animation: pop 0.8s ease;
   z-index: 2;
-
-  pointer-events: auto;
 }
 
+/* POP EFFECT */
 @keyframes pop {
   0% { transform: scale(0.3); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* CONFETTI (SMOOTHER + LESS STATIC) */
+/* subtle fade in */
+@keyframes winFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* CONFETTI (SMOOTH CONTINUOUS) */
 .winScreen::before,
 .winScreen::after {
   content: "";
@@ -181,7 +192,7 @@ h2 {
   opacity: 0.6;
 }
 
-/* CONFETTI ANIMATION */
+/* CONFETTI FALL */
 @keyframes confettiFall {
   0% { transform: translateY(-100%); }
   100% { transform: translateY(100%); }
