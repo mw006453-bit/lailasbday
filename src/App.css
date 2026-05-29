@@ -1,186 +1,217 @@
-import React from "react";
-import "./App.css";
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-export default function App() {
-  const [startTyping, setStartTyping] = React.useState(false);
-  const typeRef = React.useRef(null);
-  const audioRef = React.useRef(null);
-  const [started, setStarted] = React.useState(false);
+html, body {
+  height: 100%;
+  overflow-x: hidden;
+  background: #0f0f0f;
+  color: white;
+  font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
+}
 
-  // GAME STATES
-  const [won, setWon] = React.useState(false);
-  const [showWinScreen, setShowWinScreen] = React.useState(false);
-  const [showConfetti, setShowConfetti] = React.useState(false);
+.container {
+  width: 100%;
+}
 
-  const [emojiPos, setEmojiPos] = React.useState({
-    top: 50,
-    left: 50,
-    count: 0,
-    catchable: false,
-  });
+/* ========================= */
+/* MUSIC */
+/* ========================= */
 
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setStartTyping(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
+.music {
+  position: fixed;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+  opacity: 0.05;
+  transition: 0.3s;
+}
 
-    if (typeRef.current) observer.observe(typeRef.current);
+.music:hover {
+  opacity: 1;
+}
 
-    return () => observer.disconnect();
-  }, []);
+.audio {
+  width: 140px;
+}
 
-  React.useEffect(() => {
-    window.history.scrollRestoration = "manual";
-    window.scrollTo(0, 0);
-  }, []);
+/* ========================= */
+/* SECTIONS */
+/* ========================= */
 
-  const startExperience = async () => {
-    setStarted(true);
-    try {
-      await audioRef.current.play();
-    } catch {}
-  };
+.section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px;
+}
 
-  const moveEmoji = () => {
-    setEmojiPos((prev) => {
-      const newCount = prev.count + 1;
+/* TEXT */
 
-      if (newCount >= 4) {
-        return { ...prev, count: 4, catchable: true };
-      }
+h1 {
+  font-size: 3rem;
+}
 
-      return {
-        top: Math.random() * 70 + 10,
-        left: Math.random() * 70 + 10,
-        count: newCount,
-        catchable: false,
-      };
-    });
-  };
+h2 {
+  font-size: 1.5rem;
+  max-width: 900px;
+  line-height: 1.6;
+}
 
-  const win = () => {
-    setWon(true);
-    setShowConfetti(true);
-    setShowWinScreen(true);
+/* COLORS */
 
-    // win popup disappears after 5 sec
-    setTimeout(() => {
-      setShowWinScreen(false);
-    }, 5000);
-  };
+.highlight {
+  color: #ff4d6d;
+}
 
-  const topWords = [
-    { word: "Crazy", count: 54 },
-    { word: "amazing (ik i am)", count: 53 },
-    { word: "oui", count: 45 },
-    { word: "vm (of course)", count: 43 },
-    { word: "har (bec am always funny)", count: 38 },
-  ];
+/* SPECIAL TEXT */
 
-  const jokeWord = { word: "lailaphobic and fuckass", count: 10 };
-  const blockedCount = 7;
-  const pedoCount = 4;
+.special h2 {
+  font-size: 3.2rem !important;
+  font-weight: 800;
+  letter-spacing: 2px;
+  line-height: 1.4;
 
-  const Typewriter = ({ text, start, speed = 55 }) => {
-    const [out, setOut] = React.useState("");
+  color: #ff7ad9;
 
-    React.useEffect(() => {
-      if (!start) return;
+  text-shadow:
+    0 0 10px rgba(255,122,217,0.5),
+    0 0 25px rgba(255,122,217,0.25),
+    0 0 45px rgba(255,122,217,0.12);
+}
 
-      let i = 0;
-      const interval = setInterval(() => {
-        setOut(text.slice(0, i));
-        i++;
-        if (i > text.length) clearInterval(interval);
-      }, speed);
+/* ========================= */
+/* START OVERLAY */
+/* ========================= */
 
-      return () => clearInterval(interval);
-    }, [start, text, speed]);
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: black;
+  z-index: 9999;
 
-    return <>{out}</>;
-  };
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-  return (
-    <div className="container">
+  cursor: pointer;
+}
 
-      {/* CONFETTI (PERMANENT AFTER WIN) */}
-      {showConfetti && <div className="confettiLayer" />}
+.overlay h1 {
+  color: white;
+  font-size: 3rem;
+  text-align: center;
+  animation: pulse 2s infinite;
+}
 
-      {!started && (
-        <div className="overlay" onClick={startExperience}>
-          <h1>click anywhere to start 🎧</h1>
-        </div>
-      )}
+@keyframes pulse {
+  0% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.5; transform: scale(1); }
+}
 
-      <div className="music">
-        <audio ref={audioRef} controls className="audio">
-          <source src="/music.mp3.mp3" type="audio/mpeg" />
-        </audio>
-      </div>
+/* ========================= */
+/* GAME */
+/* ========================= */
 
-      <section className="section">
-        <h1>HAPPY BIRTHDAYY 🎉</h1>
-      </section>
+.game {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
 
-      <section className="section">
-        <h2>it took some time but i compiled all the words you said...</h2>
-      </section>
+.emoji {
+  font-size: 3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
 
-      {topWords.map((item, i) => (
-        <React.Fragment key={i}>
-          <section className="section">
-            <h1 className="highlight">{item.word}</h1>
-          </section>
-          <section className="section">
-            <h2>{item.count} times</h2>
-          </section>
-        </React.Fragment>
-      ))}
+  position: fixed;
+  transition: top 0.25s ease, left 0.25s ease;
 
-      <section className="section">
-        <h2>now that is everything, scroll more</h2>
-      </section>
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
 
-      <section className="section" ref={typeRef}>
-        <h2>
-          <Typewriter
-            start={startTyping}
-            text="I really appreciate you..."
-          />
-        </h2>
-      </section>
+/* ========================= */
+/* WIN SCREEN */
+/* ========================= */
 
-      {/* GAME */}
-      <section className="section game">
-        <h2>catch me if you can 🎉</h2>
+.winScreen {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
 
-        <button
-          className="emoji"
-          onMouseEnter={moveEmoji}
-          onClick={() => {
-            if (emojiPos.catchable) win();
-          }}
-          style={{
-            top: emojiPos.top + "vh",
-            left: emojiPos.left + "vw",
-          }}
-        >
-          🎉
-        </button>
-      </section>
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
-      {/* WIN SCREEN (TEMP ONLY) */}
-      {showWinScreen && (
-        <div className="winScreen">
-          <h1>HAPPY BIRTHDAYY 🎉</h1>
-        </div>
-      )}
-    </div>
-  );
+  z-index: 9999;
+
+  pointer-events: none;
+
+  animation: winFadeIn 0.25s ease;
+}
+
+.winScreen h1 {
+  font-size: 4rem;
+  color: #ff7ad9;
+  animation: pop 0.8s ease;
+}
+
+@keyframes pop {
+  0% { transform: scale(0.3); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes winFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ========================= */
+/* CONFETTI (SAFE + BUILD FRIENDLY) */
+/* ========================= */
+
+.confettiLayer {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  overflow: hidden;
+}
+
+.confettiLayer::before,
+.confettiLayer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image:
+    radial-gradient(circle, #ff4d6d 3px, transparent 3px),
+    radial-gradient(circle, #ffd166 3px, transparent 3px),
+    radial-gradient(circle, #06d6a0 3px, transparent 3px),
+    radial-gradient(circle, #4cc9f0 3px, transparent 3px),
+    radial-gradient(circle, #f72585 3px, transparent 3px);
+
+  background-size: 60px 60px;
+  background-repeat: repeat;
+
+  animation: confettiFall 6s linear infinite;
+  opacity: 0.9;
+}
+
+.confettiLayer::after {
+  animation-duration: 9s;
+  opacity: 0.6;
+}
+
+@keyframes confettiFall {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
 }
