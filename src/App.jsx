@@ -7,7 +7,9 @@ export default function App() {
   const audioRef = React.useRef(null);
   const [started, setStarted] = React.useState(false);
 
-  // 🎮 GAME STATE (MISSING IN YOUR CODE)
+  // 🎮 GAME STATE
+  const [won, setWon] = React.useState(false);
+
   const [emojiPos, setEmojiPos] = React.useState({
     top: 50,
     left: 50,
@@ -96,7 +98,7 @@ export default function App() {
     }
   };
 
-  // 🎮 FIXED GAME LOGIC (4 MOVES THEN WINNABLE)
+  // 🎮 GAME LOGIC
   const moveEmoji = () => {
     setEmojiPos((prev) => {
       const newCount = (prev.count || 0) + 1;
@@ -218,7 +220,7 @@ export default function App() {
           onMouseEnter={moveEmoji}
           onClick={() => {
             if (emojiPos.catchable) {
-              alert("you caught it 🎉");
+              setWon(true);
             }
           }}
           style={{
@@ -230,6 +232,13 @@ export default function App() {
           🎉
         </button>
       </section>
+
+      {/* 🎆 WIN SCREEN */}
+      {won && (
+        <div className="winScreen">
+          <h1>HAPPY BIRTHDAYY 🎉</h1>
+        </div>
+      )}
     </div>
   );
 }
