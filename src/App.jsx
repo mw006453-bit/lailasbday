@@ -10,6 +10,7 @@ export default function App() {
   // 🎮 GAME STATE
   const [won, setWon] = React.useState(false);
   const [showWinScreen, setShowWinScreen] = React.useState(false);
+  const [showConfetti, setShowConfetti] = React.useState(false);
 
   const [emojiPos, setEmojiPos] = React.useState({
     top: 50,
@@ -123,7 +124,10 @@ export default function App() {
 
   return (
     <div className="container">
-      <div className="confettiLayer" />
+
+      {/* CONFETTI (ONLY AFTER WIN) */}
+      {showConfetti && <div className="confettiLayer" />}
+
       {!started && (
         <div className="overlay" onClick={startExperience}>
           <h1>click anywhere to start 🎧</h1>
@@ -220,6 +224,7 @@ export default function App() {
             if (emojiPos.catchable) {
               setWon(true);
               setShowWinScreen(true);
+              setShowConfetti(true);
 
               setTimeout(() => {
                 setShowWinScreen(false);
@@ -237,7 +242,7 @@ export default function App() {
         </button>
       </section>
 
-      {/* 🎆 WIN SCREEN */}
+      {/* WIN SCREEN */}
       {showWinScreen && (
         <div className="winScreen">
           <h1>HAPPY BIRTHDAYY 🎉</h1>
