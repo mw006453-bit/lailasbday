@@ -8,11 +8,11 @@ export default function App() {
   const [started, setStarted] = React.useState(false);
 
   // 🎮 GAME STATE
-  const [won, setWon] = React.useState(false);
   const [showWinScreen, setShowWinScreen] = React.useState(false);
 
   const canvasRef = React.useRef(null);
   const confettiRef = React.useRef([]);
+  const animRef = React.useRef(null);
 
   const [emojiPos, setEmojiPos] = React.useState({
     top: 50,
@@ -21,37 +21,49 @@ export default function App() {
     catchable: false,
   });
 
-  // 🔥 CONFETTI SPAWN (REAL PHYSICS)
+  // 🎯 RESET GAME
+  const resetGame = () => {
+    setEmojiPos({
+      top: 50,
+      left: 50,
+      count: 0,
+      catchable: false,
+    });
+  };
+
+  // 🔥 CONFETTI SPAWN (PHYSICS BURST)
   const spawnConfetti = () => {
     const colors = ["#ff4d6d", "#ffd166", "#06d6a0", "#4cc9f0", "#f72585"];
 
-    const particles = Array.from({ length: 140 }, () => ({
+    confettiRef.current = Array.from({ length: 180 }, () => ({
       x: window.innerWidth / 2,
       y: window.innerHeight / 2,
-      vx: (Math.random() - 0.5) * 12,
-      vy: Math.random() * -12 - 6,
-      gravity: 0.28,
+      vx: (Math.random() - 0.5) * 14,
+      vy: Math.random() * -14 - 6,
+      gravity: 0.25,
       color: colors[Math.floor(Math.random() * colors.length)],
       size: Math.random() * 6 + 3,
-      life: 120,
+      life: 140,
+      rot: Math.random() * 360,
     }));
-
-    confettiRef.current = particles;
   };
 
-  // 🎬 CONFETTI LOOP
+  // 🎬 CONFETTI LOOP (FIXED)
   React.useEffect(() => {
-    let frame;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
-    const draw = () => {
-      const canvas = canvasRef.current;
-      if (!canvas) return;
+    const ctx = canvas.getContext("2d");
 
-      const ctx = canvas.getContext("2d");
-
+    const resize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+    };
 
+    resize();
+    window.addEventListener("resize", resize);
+
+    const animate = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
       confettiRef.current.forEach((p) => {
@@ -66,12 +78,15 @@ export default function App() {
 
       confettiRef.current = confettiRef.current.filter(p => p.life > 0);
 
-      frame = requestAnimationFrame(draw);
+      animRef.current = requestAnimationFrame(animate);
     };
 
-    draw();
+    animate();
 
-    return () => cancelAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(animRef.current);
+      window.removeEventListener("resize", resize);
+    };
   }, []);
 
   // 📜 TYPEWRITER TRIGGER
@@ -113,7 +128,6 @@ export default function App() {
       if (!start) return;
 
       let i = 0;
-
       const interval = setInterval(() => {
         setOut(text.slice(0, i));
         i++;
@@ -140,7 +154,7 @@ export default function App() {
   // 🎮 GAME LOGIC
   const moveEmoji = () => {
     setEmojiPos((prev) => {
-      const newCount = (prev.count || 0) + 1;
+      const newCount = prev.count + 1;
 
       if (newCount >= 4) {
         return { ...prev, count: 4, catchable: true };
@@ -182,15 +196,9 @@ export default function App() {
         </audio>
       </div>
 
-      {/* TITLE */}
+      {/* CONTENT */}
       <section className="section">
         <h1>HAPPY BIRTHDAYY 🎉</h1>
-      </section>
-
-      <section className="section">
-        <h2>
-          it took some time but i compiled all the words you said and ranked your top 5 most used words..
-        </h2>
       </section>
 
       {topWords.map((item, index) => (
@@ -204,53 +212,6 @@ export default function App() {
         </React.Fragment>
       ))}
 
-      <section className="section special">
-        <h2>if i had a dime for everytime you said "{jokeWord.word}"</h2>
-      </section>
-
-      <section className="section special">
-        <h2>i'd have {jokeWord.count} dimes which isn't alot but funny</h2>
-      </section>
-
-      <section className="section special">
-        <h2>i have been</h2>
-      </section>
-
-      <section className="section special">
-        <h2>emotionally blocked {blockedCount} times</h2>
-      </section>
-
-      <section className="section special">
-        <h2>you have made 6-7 jokes</h2>
-      </section>
-
-      <section className="section special">
-        <h2>17 times🫩</h2>
-      </section>
-
-      <section className="section special">
-        <h2>you called yourself a pedo because you're one year older</h2>
-      </section>
-
-      <section className="section special">
-        <h2>{pedoCount} times</h2>
-      </section>
-
-      <section className="section">
-        <h2>now that is everything, scroll more :D</h2>
-      </section>
-
-      <section className="section" ref={typeRef}>
-        <h2>
-          <Typewriter
-            start={startTyping}
-            speed={55}
-            text="I know its not much but i really wanted to tell you that i enjoy your friendship so much..."
-          />
-        </h2>
-      </section>
-
-      {/* GAME */}
       <section className="section game">
         <h2>catch me if you can :D</h2>
 
@@ -259,15 +220,14 @@ export default function App() {
           onMouseEnter={moveEmoji}
           onClick={() => {
             if (emojiPos.catchable) {
-              setWon(true);
-              setShowWinScreen(true);
 
+              setShowWinScreen(true);
               spawnConfetti();
 
               setTimeout(() => {
                 setShowWinScreen(false);
-                setWon(false);
-              }, 5000);
+                resetGame();
+              }, 4000);
             }
           }}
           style={{
@@ -286,6 +246,16 @@ export default function App() {
           <h1>HAPPY BIRTHDAYY 🎉</h1>
         </div>
       )}
+
+      <section className="section" ref={typeRef}>
+        <h2>
+          <Typewriter
+            start={startTyping}
+            text="I know its not much but i really wanted to tell you that i enjoy your friendship so much..."
+          />
+        </h2>
+      </section>
+
     </div>
   );
 }
