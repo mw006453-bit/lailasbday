@@ -127,3 +127,21 @@ h2 {
 .audio {
   width: 140px;
 }
+.game {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+}
+
+.emoji {
+  font-size: 3rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  position: fixed;
+  transition: top 0.25s ease, left 0.25s ease;
+}
+.emoji {
+  filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
+}
