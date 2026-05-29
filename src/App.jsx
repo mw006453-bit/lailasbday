@@ -4,6 +4,7 @@ import "./App.css";
 export default function App() {
   const [startTyping, setStartTyping] = React.useState(false);
 const typeRef = React.useRef(null);
+  const audioRef = React.useRef(null);
   React.useEffect(() => {
   const observer = new IntersectionObserver(
     ([entry]) => {
@@ -61,13 +62,29 @@ const typeRef = React.useRef(null);
     window.history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
   }, []);
+  React.useEffect(() => {
+  const tryPlay = async () => {
+    try {
+      await audioRef.current.play();
+    } catch (err) {
+      console.log("Autoplay blocked");
+    }
+  };
+
+  tryPlay();
+}, []);
 
   return (
     <div className="container">
 
       {/* MUSIC (FIXED TOP RIGHT) */}
       <div className="music">
-        <audio controls className="audio">
+       <audio
+  ref={audioRef}
+  controls
+  autoPlay
+  className="audio"
+>
           <source src="/music.mp3.mp3" type="audio/mpeg" />
         </audio>
       </div>
