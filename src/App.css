@@ -207,3 +207,9 @@ canvas {
   pointer-events: none;
   z-index: 99998;
 }
+.catchable {
+  transform: scale(1.25);
+  filter:
+    drop-shadow(0 0 18px gold)
+    drop-shadow(0 0 35px gold);
+}
