@@ -10,6 +10,7 @@ html, body {
   background: #0f0f0f;
   color: white;
   font-family: Arial, sans-serif;
+  scroll-behavior: smooth;
 }
 
 .container {
@@ -19,13 +20,19 @@ html, body {
 /* MUSIC FIXED TOP RIGHT */
 .music {
   position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 9999;
+  top: 15px;
+  right: 15px;
+  z-index: 1000;
+  opacity: 0.05;
+  transition: 0.3s;
+}
+
+.music:hover {
+  opacity: 1;
 }
 
 .audio {
-  width: 180px;
+  width: 140px;
 }
 
 /* SECTIONS */
@@ -54,14 +61,9 @@ h2 {
 .highlight {
   color: #ff4d6d;
 }
+
+/* SPECIAL TEXT BLOCKS */
 .special h2 {
-  font-size: 3rem;
-  font-weight: 700;
-  letter-spacing: 1px;
-  line-height: 1.4;
-  text-shadow: 0 0 15px rgba(255,255,255,0.15);
-}
-.section.special h2 {
   font-size: 3.2rem !important;
   font-weight: 800;
   letter-spacing: 2px;
@@ -74,6 +76,8 @@ h2 {
     0 0 25px rgba(255,122,217,0.25),
     0 0 45px rgba(255,122,217,0.12);
 }
+
+/* OVERLAY START SCREEN */
 .overlay {
   position: fixed;
   inset: 0;
@@ -95,44 +99,19 @@ h2 {
 }
 
 @keyframes pulse {
-  0% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.05);
-  }
-
-  100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-}
-.music {
-  position: fixed;
-  top: 15px;
-  right: 15px;
-  z-index: 1000;
-
-  opacity: 0.05;
-  transition: 0.3s;
+  0% { opacity: 0.5; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.05); }
+  100% { opacity: 0.5; transform: scale(1); }
 }
 
-.music:hover {
-  opacity: 1;
-}
-
-.audio {
-  width: 140px;
-}
+/* GAME */
 .game {
   position: relative;
   min-height: 100vh;
   overflow: hidden;
 }
 
+/* EMOJI BUTTON */
 .emoji {
   font-size: 3rem;
   background: none;
@@ -141,25 +120,34 @@ h2 {
 
   position: fixed;
   transition: top 0.25s ease, left 0.25s ease;
-}
-.emoji {
+
   filter: drop-shadow(0 0 10px rgba(255,255,255,0.3));
 }
+
+/* WIN SCREEN (FIXED: ALLOWS SCROLL BEHIND) */
 .winScreen {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.92);
+
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
+
   z-index: 99999;
-  overflow: hidden;
+
+  pointer-events: none;
 }
 
+/* WIN TEXT */
 .winScreen h1 {
   font-size: 4rem;
   color: #ff7ad9;
   animation: pop 0.8s ease;
+  z-index: 2;
+
+  pointer-events: auto;
 }
 
 @keyframes pop {
@@ -167,31 +155,13 @@ h2 {
   100% { transform: scale(1); opacity: 1; }
 }
 
-.winScreen {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.92);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 99999;
-  overflow: hidden;
-}
-
-/* CENTER TEXT */
-.winScreen h1 {
-  font-size: 4rem;
-  color: #ff7ad9;
-  animation: pop 0.8s ease;
-  z-index: 2;
-}
-
-/* REALISTIC CONFETTI PARTICLES */
+/* CONFETTI (SMOOTHER + LESS STATIC) */
 .winScreen::before,
 .winScreen::after {
   content: "";
   position: absolute;
   inset: 0;
+
   background-image:
     radial-gradient(circle, #ff4d6d 3px, transparent 3px),
     radial-gradient(circle, #ffd166 3px, transparent 3px),
@@ -202,20 +172,17 @@ h2 {
   background-size: 60px 60px;
   background-position: 0 0, 20px 40px, 40px 10px, 10px 30px, 30px 50px;
 
-  animation: confettiFall 3s linear infinite;
+  animation: confettiFall 6s linear infinite;
   opacity: 0.9;
 }
 
 .winScreen::after {
-  animation-duration: 4s;
+  animation-duration: 8s;
   opacity: 0.6;
 }
 
+/* CONFETTI ANIMATION */
 @keyframes confettiFall {
-  0% {
-    transform: translateY(-100%);
-  }
-  100% {
-    transform: translateY(100%);
-  }
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
 }
