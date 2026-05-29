@@ -167,25 +167,55 @@ h2 {
   100% { transform: scale(1); opacity: 1; }
 }
 
-/* CONFETTI */
+.winScreen {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.92);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99999;
+  overflow: hidden;
+}
+
+/* CENTER TEXT */
+.winScreen h1 {
+  font-size: 4rem;
+  color: #ff7ad9;
+  animation: pop 0.8s ease;
+  z-index: 2;
+}
+
+/* REALISTIC CONFETTI PARTICLES */
 .winScreen::before,
 .winScreen::after {
-  content: "🎉 🎊 ✨ 🎈 🎉 🎊 ✨ 🎈 🎉 🎊";
+  content: "";
   position: absolute;
-  top: -10%;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2rem;
-  white-space: nowrap;
-  animation: fall 3s linear infinite;
+  inset: 0;
+  background-image:
+    radial-gradient(circle, #ff4d6d 3px, transparent 3px),
+    radial-gradient(circle, #ffd166 3px, transparent 3px),
+    radial-gradient(circle, #06d6a0 3px, transparent 3px),
+    radial-gradient(circle, #4cc9f0 3px, transparent 3px),
+    radial-gradient(circle, #f72585 3px, transparent 3px);
+
+  background-size: 60px 60px;
+  background-position: 0 0, 20px 40px, 40px 10px, 10px 30px, 30px 50px;
+
+  animation: confettiFall 3s linear infinite;
+  opacity: 0.9;
 }
 
 .winScreen::after {
-  animation-delay: 1.5s;
-  opacity: 0.7;
+  animation-duration: 4s;
+  opacity: 0.6;
 }
 
-@keyframes fall {
-  0% { transform: translate(-50%, -10%); }
-  100% { transform: translate(-50%, 110vh); }
+@keyframes confettiFall {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
 }
