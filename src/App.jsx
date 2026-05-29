@@ -146,7 +146,6 @@ export default function App() {
         </h2>
       </section>
 
-      {/* TOP WORDS */}
       {topWords.map((item, index) => (
         <React.Fragment key={index}>
           <section className="section">
@@ -159,7 +158,6 @@ export default function App() {
         </React.Fragment>
       ))}
 
-      {/* JOKE */}
       <section className="section special">
         <h2>if i had a dime for everytime you said "{jokeWord.word}"</h2>
       </section>
@@ -170,7 +168,6 @@ export default function App() {
         </h2>
       </section>
 
-      {/* STATS */}
       <section className="section special">
         <h2>i have been</h2>
       </section>
@@ -199,7 +196,6 @@ export default function App() {
         <h2>now that is everything, scroll down more tho &gt;:(</h2>
       </section>
 
-      {/* TYPEWRITER */}
       <section className="section" ref={typeRef}>
         <h2>
           <Typewriter
@@ -210,7 +206,7 @@ export default function App() {
         </h2>
       </section>
 
-      {/* 🎮 GAME */}
+      {/* GAME */}
       <section className="section game">
         <h2>catch me if you can :D</h2>
         <p>good luck</p>
@@ -233,7 +229,7 @@ export default function App() {
         </button>
       </section>
 
-      {/* 🎆 WIN SCREEN */}
+      {/* 🎆 WIN SCREEN (FIXED: SCROLLABLE + NOT BLOCKING PAGE) */}
       {won && (
         <div className="winScreen">
           <h1>HAPPY BIRTHDAYY 🎉</h1>
