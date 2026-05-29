@@ -265,7 +265,8 @@ export default function App() {
 
       {/* GAME */}
       <section className="section game">
-        <h2>catch me if you can :D</h2>
+        <h2>catch me if you can :D
+        (catch it when it glows)</h2>
 
         <button
           className={`emoji ${emojiPos.catchable ? "catchable" : ""}`}
