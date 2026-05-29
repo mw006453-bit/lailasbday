@@ -7,19 +7,28 @@ export default function App() {
   const audioRef = React.useRef(null);
   const [started, setStarted] = React.useState(false);
 
-  // 🎮 GAME STATE (ADDED)
-  const [emojiPos, setEmojiPos] = React.useState({ top: 50, left: 50 });
+ const moveEmoji = () => {
+  setEmojiPos((prev) => {
+    let newPos;
 
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setStartTyping(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.5 }
-    );
+    // 20% chance it becomes catchable
+    const isCatchable = Math.random() < 0.2;
+
+    if (isCatchable) {
+      newPos = {
+        top: prev.top,
+        left: prev.left,
+      };
+    } else {
+      newPos = {
+        top: Math.random() * 70 + 10,
+        left: Math.random() * 70 + 10,
+      };
+    }
+
+    return newPos;
+  });
+};
 
     if (typeRef.current) {
       observer.observe(typeRef.current);
