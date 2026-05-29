@@ -151,22 +151,19 @@ export default function App() {
   };
 
   // 🎮 GAME LOGIC
-  const moveEmoji = () => {
-    setEmojiPos((prev) => {
-      const newCount = prev.count + 1;
+ const moveEmoji = () => {
+  setEmojiPos((prev) => {
+    // 25% chance to become catchable each move
+    const lucky = Math.random() < 0.25;
 
-      if (newCount >= 4) {
-        return { ...prev, count: 4, catchable: true };
-      }
-
-      return {
-        top: Math.random() * 70 + 10,
-        left: Math.random() * 70 + 10,
-        count: newCount,
-        catchable: false,
-      };
-    });
-  };
+    return {
+      top: Math.random() * 70 + 10,
+      left: Math.random() * 70 + 10,
+      count: prev.count + 1,
+      catchable: lucky,
+    };
+  });
+};
 
   return (
     <div className="container">
@@ -271,7 +268,7 @@ export default function App() {
         <h2>catch me if you can :D</h2>
 
         <button
-          className="emoji"
+          className={`emoji ${emojiPos.catchable ? "catchable" : ""}`}
           onMouseEnter={moveEmoji}
           onClick={() => {
             if (emojiPos.catchable) {
