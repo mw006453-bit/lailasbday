@@ -190,7 +190,7 @@ export default function App() {
 
       {/* MUSIC */}
       <div className="music">
-        <audio ref={audioRef} controls className="audio">
+        <audio ref={audioRef} loop controls className="audio">
           <source src="/music.mp3.mp3" type="audio/mpeg" />
         </audio>
       </div>
