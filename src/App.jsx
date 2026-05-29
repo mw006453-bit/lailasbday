@@ -152,6 +152,7 @@ export default function App() {
 
   // 🎮 GAME LOGIC
  const moveEmoji = () => {
+   if (emojiPos.catchable) return;
   setEmojiPos((prev) => {
     // 25% chance to become catchable each move
     const lucky = Math.random() < 0.25;
