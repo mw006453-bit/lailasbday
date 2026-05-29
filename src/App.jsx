@@ -123,6 +123,7 @@ export default function App() {
 
   return (
     <div className="container">
+      <div className="confettiLayer" />
       {!started && (
         <div className="overlay" onClick={startExperience}>
           <h1>click anywhere to start 🎧</h1>
