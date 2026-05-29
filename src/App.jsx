@@ -9,6 +9,7 @@ export default function App() {
 
   // 🎮 GAME STATE
   const [won, setWon] = React.useState(false);
+  const [showWinScreen, setShowWinScreen] = React.useState(false);
 
   const [emojiPos, setEmojiPos] = React.useState({
     top: 50,
@@ -217,6 +218,12 @@ export default function App() {
           onClick={() => {
             if (emojiPos.catchable) {
               setWon(true);
+              setShowWinScreen(true);
+
+              setTimeout(() => {
+                setShowWinScreen(false);
+                setWon(false);
+              }, 5000);
             }
           }}
           style={{
@@ -229,8 +236,8 @@ export default function App() {
         </button>
       </section>
 
-      {/* 🎆 WIN SCREEN (FIXED: SCROLLABLE + NOT BLOCKING PAGE) */}
-      {won && (
+      {/* 🎆 WIN SCREEN */}
+      {showWinScreen && (
         <div className="winScreen">
           <h1>HAPPY BIRTHDAYY 🎉</h1>
         </div>
